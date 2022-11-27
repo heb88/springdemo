@@ -47,7 +47,15 @@ public class Bootstrap implements CommandLineRunner
 
 
       Publisher piggybackPublisher = new Publisher("Piggyback");
+      piggybackPublisher.getBooks().add(ericsBook);
+      piggybackPublisher.getBooks().add(nicksBook);
       publisherRepository.save(piggybackPublisher);
+
+      nicksBook.setPublisher(piggybackPublisher);
+      ericsBook.setPublisher(piggybackPublisher);
+      bookRepository.save(ericsBook);
+      bookRepository.save(nicksBook);
+
 
       System.out.println("Amount of Books: " + bookRepository.count());
       System.out.println("Amount of Authors: " + authorRepository.count());
